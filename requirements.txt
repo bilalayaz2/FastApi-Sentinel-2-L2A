@@ -1,5 +1,4 @@
 aenum==3.1.11
-python==3.10
 anyio==3.6.2
 asttokens==2.2.1
 attrs==22.2.0
