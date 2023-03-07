@@ -19,11 +19,6 @@ class Sent:
     self.config.sh_client_id = '2bd35ae0-96d0-49d9-a575-b5b63a3c02f0'
     self.config.save()
     
-  # if not config.sh_client_id or not config.sh_client_secret:
-  #     print("Warning! To use Process API, please provide the credentials (OAuth client ID and client secret).")
-  # else:
-  #     print('Step 1: Initialization Completed Succesfully.')
-
   def swap(self,list,check):
       n = 2 if len(list)%2 == 0 else 3
       for i in range(0,len(list),n):
