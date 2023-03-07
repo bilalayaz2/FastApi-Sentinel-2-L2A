@@ -7,7 +7,6 @@ import numpy as np
 import io
 from imageio import v3 as iio
 
-
 app = FastAPI()
 
 class Track(BaseModel):
@@ -15,8 +14,8 @@ class Track(BaseModel):
     en_date : str
     points : list
     es: str
-    
-
+     
+     
 def plot_image(image, factor: float = 1.0, clip_range= None, **kwargs):
     """Utility function for plotting RGB images."""
     fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(15, 15))
@@ -26,7 +25,6 @@ def plot_image(image, factor: float = 1.0, clip_range= None, **kwargs):
         ax.imshow(image * factor, **kwargs)
     ax.set_xticks([])
     ax.set_yticks([])
-
 
 @app.post("/")
 def root(track: Track):
@@ -41,8 +39,4 @@ def root(track: Track):
         im_bytes = buf.getvalue()
     
     return Response(im_bytes, media_type='image/png')
-            
-    
-    
-    
-    # return track_dict["st_date"], track_dict["en_date"], track_dict["n"], track_dict["points"], track_dict["es"]
+   

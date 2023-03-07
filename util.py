@@ -149,8 +149,8 @@ class Sent:
               SentinelHubRequest.input_data(
                   data_collection = DataCollection.SENTINEL2_L2A,
                   time_interval = time_interval,
-                  # mosaicking_order = 'leastCC',
-                  other_args = {"dataFilter": {"maxCloudCoverage": 0}},
+                  mosaicking_order = 'leastCC',
+                  # other_args = {"dataFilter": {"maxCloudCoverage": 0}},
                   # maxcc = 10
               )
           ],
