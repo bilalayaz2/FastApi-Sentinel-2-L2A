@@ -34,9 +34,11 @@ def root(track: Track):
     pt = track_dict["points"]
     es = track_dict["es"]
     data = Sent(st, en, pt, es).dat() 
-    with io.BytesIO() as buf:
-        iio.imwrite(buf, data[0], plugin="pillow", format="png")
-        im_bytes = buf.getvalue()
-    
-    return Response(im_bytes, media_type='image/png')
+    if es != "all_bands":
+        with io.BytesIO() as buf:
+            iio.imwrite(buf, data[0], plugin="pillow", format="png")
+            im_bytes = buf.getvalue()
+        return Response(im_bytes, media_type='image/png')
+    else:
+        return data
    

@@ -128,6 +128,29 @@ class Sent:
       }
     }
     """
+    
+    all_bands = """
+    function setup() {
+      return {
+        input: [{
+          bands: ["B01", "B02", "B03", "B04", "B05", "B06", "B07", "B08", "B8A", "B09", "B11", "B12"],
+          units: "DN"
+        }],
+        output: {
+          id: "default",
+          bands: 12,
+          sampleType: SampleType.UINT16
+        }
+      }
+    }
+
+    function evaluatePixel(sample) {
+        return [ sample.B01, sample.B02, sample.B03, sample.B04, sample.B05, sample.B06, sample.B07, sample.B08, sample.B8A, sample.B09, sample.B11, sample.B12]
+    }
+    """
+    if self.es == "all_bands":
+      return all_bands
+    
     if self.es == "rgb":
       return true
     
@@ -171,8 +194,6 @@ class Sent:
       tdelta = (end - start) / n_chunks
       edges = [(start + i*tdelta).date().isoformat() for i in range(n_chunks)]
       slots = [(edges[i], edges[i+1]) for i in range(len(edges)-1)]
-      # print("slots done")
-      # return slots
       
       
       data = []
@@ -181,13 +202,60 @@ class Sent:
       list_of_requests = [self.evalscript_request(slot, self.ev_s(), geometry, size) for slot in slots]
       list_of_requests = [request.download_list[0] for request in list_of_requests]
       data.append(SentinelHubDownloadClient(config=self.config).download(list_of_requests, max_threads=5))
-      # print("data downloaded")
       
-      return data
+      if self.es != "all_bands":
+        return data
+      else:
+        dic = {
+        "b1": [],
+        "b2": [],
+        "b3": [],
+        "b4": [],
+        "b5": [],
+        "b6": [],
+        "b7": [],
+        "b8": [],
+        "b9": [],
+        "b10": [],
+        "b11": [],
+        "b12": []
+        }
+
+        for i in range(0,len(data)):
+            img = data[i]
+            for a in range (len(img)):
+                for b in range(len(img[0])):
+                    for c in range(len(img[0][0])):
+                        for d in range(12):
+                            if d == 0:
+                                dic["b1"].append(img[a][b][c][d])
+                            if d == 1:
+                                dic["b2"].append(img[a][b][c][d])
+                            if d == 2:
+                                dic["b3"].append(img[a][b][c][d])
+                            if d == 3:
+                                dic["b4"].append(img[a][b][c][d])
+                            if d == 4:
+                                dic["b5"].append(img[a][b][c][d])
+                            if d == 5:
+                                dic["b6"].append(img[a][b][c][d])
+                            if d == 6:
+                                dic["b7"].append(img[a][b][c][d])
+                            if d == 7:
+                                dic["b8"].append(img[a][b][c][d])
+                            if d == 8:
+                                dic["b9"].append(img[a][b][c][d])
+                            if d == 9:
+                                dic["b10"].append(img[a][b][c][d])
+                            if d == 10:
+                                dic["b11"].append(img[a][b][c][d])
+                            if d == 11:
+                                dic["b12"].append(img[a][b][c][d])
+        return dic               
     
     
 if __name__ == '__main__':
-  a = Sent("2020,3,12", "2020,4,13", ["30.396205893130897","73.5142720118165","30.396216593214966","73.51282797753811","30.394866638221142","73.5128889977932","30.394874157302326","73.51428642868996"], "rgb").dat()
-  # print(a)
+  a = Sent("2020,3,12", "2020,4,13", ["30.396205893130897","73.5142720118165","30.396216593214966","73.51282797753811","30.394866638221142","73.5128889977932","30.394874157302326","73.51428642868996"], "all_bands").dat()
+  print(a)
   
   
