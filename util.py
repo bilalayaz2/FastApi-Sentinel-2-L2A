@@ -206,20 +206,22 @@ class Sent:
       if self.es != "all_bands":
         return data
       else:
-        dic = {
-        "b1": [],
-        "b2": [],
-        "b3": [],
-        "b4": [],
-        "b5": [],
-        "b6": [],
-        "b7": [],
-        "b8": [],
-        "b9": [],
-        "b10": [],
-        "b11": [],
-        "b12": []
-        }
+        # dic = {
+        # "b1": [],
+        # "b2": [],
+        # "b3": [],
+        # "b4": [],
+        # "b5": [],
+        # "b6": [],
+        # "b7": [],
+        # "b8": [],
+        # "b9": [],
+        # "b10": [],
+        # "b11": [],
+        # "b12": []
+        # }
+
+        lst = [[],[],[],[],[],[],[],[],[],[],[],[]]
 
         for i in range(0,len(data)):
             img = data[i]
@@ -228,34 +230,46 @@ class Sent:
                     for c in range(len(img[0][0])):
                         for d in range(12):
                             if d == 0:
-                                dic["b1"].append(img[a][b][c][d])
+                                # dic["b1"].append(img[a][b][c][d])
+                                lst[0].append(img[a][b][c][d])
                             if d == 1:
-                                dic["b2"].append(img[a][b][c][d])
+                                # dic["b2"].append(img[a][b][c][d])
+                                lst[1].append(img[a][b][c][d])
                             if d == 2:
-                                dic["b3"].append(img[a][b][c][d])
+                                # dic["b3"].append(img[a][b][c][d])
+                                lst[2].append(img[a][b][c][d])
                             if d == 3:
-                                dic["b4"].append(img[a][b][c][d])
+                                # dic["b4"].append(img[a][b][c][d])
+                                lst[3].append(img[a][b][c][d])
                             if d == 4:
-                                dic["b5"].append(img[a][b][c][d])
+                                # dic["b5"].append(img[a][b][c][d])
+                                lst[4].append(img[a][b][c][d])
                             if d == 5:
-                                dic["b6"].append(img[a][b][c][d])
+                                # dic["b6"].append(img[a][b][c][d])
+                                lst[5].append(img[a][b][c][d])
                             if d == 6:
-                                dic["b7"].append(img[a][b][c][d])
+                                # dic["b7"].append(img[a][b][c][d])
+                                lst[6].append(img[a][b][c][d])
                             if d == 7:
-                                dic["b8"].append(img[a][b][c][d])
+                                # dic["b8"].append(img[a][b][c][d])
+                                lst[7].append(img[a][b][c][d])
                             if d == 8:
-                                dic["b9"].append(img[a][b][c][d])
+                                # dic["b9"].append(img[a][b][c][d])
+                                lst[8].append(img[a][b][c][d])
                             if d == 9:
-                                dic["b10"].append(img[a][b][c][d])
+                                # dic["b10"].append(img[a][b][c][d])
+                                lst[9].append(img[a][b][c][d])
                             if d == 10:
-                                dic["b11"].append(img[a][b][c][d])
+                                # dic["b11"].append(img[a][b][c][d])
+                                lst[10].append(img[a][b][c][d])
                             if d == 11:
-                                dic["b12"].append(img[a][b][c][d])
-        return dic               
+                                # dic["b12"].append(img[a][b][c][d])
+                                lst[11].append(img[a][b][c][d])
+        return lst              
     
     
 if __name__ == '__main__':
   a = Sent("2020,3,12", "2020,4,13", ["30.396205893130897","73.5142720118165","30.396216593214966","73.51282797753811","30.394866638221142","73.5128889977932","30.394874157302326","73.51428642868996"], "all_bands").dat()
-  print(type(a))
+  print(a)
   
   
