@@ -206,22 +206,22 @@ class Sent:
       if self.es != "all_bands":
         return data
       else:
-        # dic = {
-        # "b1": [],
-        # "b2": [],
-        # "b3": [],
-        # "b4": [],
-        # "b5": [],
-        # "b6": [],
-        # "b7": [],
-        # "b8": [],
-        # "b9": [],
-        # "b10": [],
-        # "b11": [],
-        # "b12": []
-        # }
+        dic = {
+        "b1": [],
+        "b2": [],
+        "b3": [],
+        "b4": [],
+        "b5": [],
+        "b6": [],
+        "b7": [],
+        "b8": [],
+        "b9": [],
+        "b10": [],
+        "b11": [],
+        "b12": []
+        }
 
-        lst = [[],[],[],[],[],[],[],[],[],[],[],[]]
+        # lst = [[],[],[],[],[],[],[],[],[],[],[],[]]
 
         for i in range(0,len(data)):
             img = data[i]
@@ -230,42 +230,42 @@ class Sent:
                     for c in range(len(img[0][0])):
                         for d in range(12):
                             if d == 0:
-                                # dic["b1"].append(img[a][b][c][d])
-                                lst[0].append(str(img[a][b][c][d]))
+                                dic["b1"].append(str(img[a][b][c][d]))
+                                # lst[0].append(str(img[a][b][c][d]))
                             if d == 1:
-                                # dic["b2"].append(img[a][b][c][d])
-                                lst[1].append(str(img[a][b][c][d]))
+                                dic["b2"].append(str(img[a][b][c][d]))
+                                # lst[1].append(str(img[a][b][c][d]))
                             if d == 2:
-                                # dic["b3"].append(img[a][b][c][d])
-                                lst[2].append(str(img[a][b][c][d]))
+                                dic["b3"].append(str(img[a][b][c][d]))
+                                # lst[2].append(str(img[a][b][c][d]))
                             if d == 3:
-                                # dic["b4"].append(img[a][b][c][d])
-                                lst[3].append(str(img[a][b][c][d]))
+                                dic["b4"].append(str(img[a][b][c][d]))
+                                # lst[3].append(str(img[a][b][c][d]))
                             if d == 4:
-                                # dic["b5"].append(img[a][b][c][d])
-                                lst[4].append(str(img[a][b][c][d]))
+                                dic["b5"].append(str(img[a][b][c][d]))
+                                # lst[4].append(str(img[a][b][c][d]))
                             if d == 5:
-                                # dic["b6"].append(img[a][b][c][d])
-                                lst[5].append(str(img[a][b][c][d]))
+                                dic["b6"].append(str(img[a][b][c][d]))
+                                # lst[5].append(str(img[a][b][c][d]))
                             if d == 6:
-                                # dic["b7"].append(img[a][b][c][d])
-                                lst[6].append(str(img[a][b][c][d]))
+                                dic["b7"].append(str(img[a][b][c][d]))
+                                # lst[6].append(str(img[a][b][c][d]))
                             if d == 7:
-                                # dic["b8"].append(img[a][b][c][d])
-                                lst[7].append(str(img[a][b][c][d]))
+                                dic["b8"].append(str(img[a][b][c][d]))
+                                # lst[7].append(str(img[a][b][c][d]))
                             if d == 8:
-                                # dic["b9"].append(img[a][b][c][d])
-                                lst[8].append(str(img[a][b][c][d]))
+                                dic["b9"].append(str(img[a][b][c][d]))
+                                # lst[8].append(str(img[a][b][c][d]))
                             if d == 9:
-                                # dic["b10"].append(img[a][b][c][d])
-                                lst[9].append(str(img[a][b][c][d]))
+                                dic["b10"].append(str(img[a][b][c][d]))
+                                # lst[9].append(str(img[a][b][c][d]))
                             if d == 10:
-                                # dic["b11"].append(img[a][b][c][d])
-                                lst[10].append(str(img[a][b][c][d]))
+                                dic["b11"].append(str(img[a][b][c][d]))
+                                # lst[10].append(str(img[a][b][c][d]))
                             if d == 11:
-                                # dic["b12"].append(img[a][b][c][d])
-                                lst[11].append(str(img[a][b][c][d]))
-        return lst              
+                                dic["b12"].append(str(img[a][b][c][d]))
+                                # lst[11].append(str(img[a][b][c][d]))
+        return dic    
     
     
 if __name__ == '__main__':
