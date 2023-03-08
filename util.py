@@ -162,7 +162,7 @@ class Sent:
               SentinelHubRequest.input_data(
                   data_collection = DataCollection.SENTINEL2_L2A,
                   time_interval = time_interval,
-                  mosaicking_order = 'leastCC'
+                  mosaicking_order = 'leastCC',
                   # other_args = {"dataFilter": {"maxCloudCoverage": 0}},
                   # maxcc = 10
               )
@@ -189,10 +189,9 @@ class Sent:
       edges = [(start + i*tdelta).date().isoformat() for i in range(n_chunks)]
       slots = [(edges[i], edges[i+1]) for i in range(len(edges)-1)]
       
-      
       data = []
       geometry = Geometry(geometry={"type":"Polygon","coordinates":[np.reshape(self.swap(self.points,1), (-1, 2))]}, crs=CRS.WGS84)
-      size = bbox_to_dimensions(geometry.bbox, resolution=10)
+      size = bbox_to_dimensions(geometry.bbox, resolution=1)
       list_of_requests = [self.evalscript_request(slot, self.ev_s(), geometry, size) for slot in slots]
       list_of_requests = [request.download_list[0] for request in list_of_requests]
       data.append(SentinelHubDownloadClient(config=self.config).download(list_of_requests, max_threads=5))
