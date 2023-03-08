@@ -191,7 +191,7 @@ class Sent:
       
       data = []
       geometry = Geometry(geometry={"type":"Polygon","coordinates":[np.reshape(self.swap(self.points,1), (-1, 2))]}, crs=CRS.WGS84)
-      size = bbox_to_dimensions(geometry.bbox, resolution=1)
+      size = bbox_to_dimensions(geometry.bbox, resolution=5)
       list_of_requests = [self.evalscript_request(slot, self.ev_s(), geometry, size) for slot in slots]
       list_of_requests = [request.download_list[0] for request in list_of_requests]
       data.append(SentinelHubDownloadClient(config=self.config).download(list_of_requests, max_threads=5))
