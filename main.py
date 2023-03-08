@@ -41,5 +41,5 @@ def root(track: Track):
             im_bytes = buf.getvalue()
         return Response(im_bytes, media_type='image/png')
     else:
-        return JSONResponse(content=data)
+        return Response(content=data, type="JSON")
    
