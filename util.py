@@ -124,6 +124,36 @@ class Sent:
     }
     """
     
+    abg = """
+//VERSION=3
+    function setup() {
+        return {
+            input: [{
+                bands: ["B02","B04","B08","B05", "B03"]
+            }],
+            output: {
+                bands: 3
+            }
+        };
+    }
+    function evaluatePixel(sample) {
+    //let EVI = 2.5 * (sample.B08 - sample.B04) / ((sample.B08 + 6.0 * sample.B04 - 7.5 * sample.B02) + 1.0);
+    //let NDI45 = (sample.B05 - sample.B04) / (sample.B05 + sample.B04); 
+    //let AGB = (537 * NDI45) + (158.42 * EVI) - 353.66;
+    //let AGB = sample.B02 / (sample.B03 + sample.B04);
+    //let AGB = (sample.B08 - sample.B04) / (sample.B08 + sample.B04);
+    let SOC = (sample.B02 / (sample.B03 * sample.B04))/10;
+
+return colorBlend(SOC,
+   [0, 0.25, 0.75,1.0 ],
+   [[165/255,0,38/255],        //  -> 0 = #a50026
+    [215/255,48/255,39/255],   //  -> .1 = #d73027
+    [244/255,109/255,67/255],  //  -> .2 = #f46d43
+    [253/255,174/255,97/255],  //  -> .3 = #fdae61
+   ])
+}
+"""
+    
     all_bands = """
     function setup() {
       return {
@@ -154,6 +184,9 @@ class Sent:
       
     if self.es == "ndwi":
       return wat
+    
+    if self.es == "abg":
+      return abg
     
   def evalscript_request(self,time_interval,evalscript,geometry, size):
       return SentinelHubRequest(
@@ -196,74 +229,79 @@ class Sent:
       list_of_requests = [request.download_list[0] for request in list_of_requests]
       data.append(SentinelHubDownloadClient(config=self.config).download(list_of_requests, max_threads=5))
       
-      if self.es != "all_bands":
-        return data
       
-      else:
+      if size > 100:
+        if self.es != "all_bands":
+          return data
         
-        dic = {
-        "b1": [],
-        "b2": [],
-        "b3": [],
-        "b4": [],
-        "b5": [],
-        "b6": [],
-        "b7": [],
-        "b8": [],
-        "b9": [],
-        "b10": [],
-        "b11": [],
-        "b12": []
-        }
+        else:
+          
+          dic = {
+          "b1": [],
+          "b2": [],
+          "b3": [],
+          "b4": [],
+          "b5": [],
+          "b6": [],
+          "b7": [],
+          "b8": [],
+          "b9": [],
+          "b10": [],
+          "b11": [],
+          "b12": []
+          }
 
 
-        for i in range(0,len(data)):
-            img = data[i]
-            for a in range (len(img)):
-                for b in range(len(img[0])):
-                    for c in range(len(img[0][0])):
-                        for d in range(12):
-                            if d == 0:
-                                dic["b1"].append(str(img[a][b][c][d]))
-                                
-                            if d == 1:
-                                dic["b2"].append(str(img[a][b][c][d]))
-                                
-                            if d == 2:
-                                dic["b3"].append(str(img[a][b][c][d]))
-                                
-                            if d == 3:
-                                dic["b4"].append(str(img[a][b][c][d]))
-                                
-                            if d == 4:
-                                dic["b5"].append(str(img[a][b][c][d]))
-                                
-                            if d == 5:
-                                dic["b6"].append(str(img[a][b][c][d]))
-                                
-                            if d == 6:
-                                dic["b7"].append(str(img[a][b][c][d]))
-                                
-                            if d == 7:
-                                dic["b8"].append(str(img[a][b][c][d]))
-                                
-                            if d == 8:
-                                dic["b9"].append(str(img[a][b][c][d]))
-                                
-                            if d == 9:
-                                dic["b10"].append(str(img[a][b][c][d]))
-                                
-                            if d == 10:
-                                dic["b11"].append(str(img[a][b][c][d]))
-                                
-                            if d == 11:
-                                dic["b12"].append(str(img[a][b][c][d]))
-                                
-        return dic    
+          for i in range(0,len(data)):
+              img = data[i]
+              for a in range (len(img)):
+                  for b in range(len(img[0])):
+                      for c in range(len(img[0][0])):
+                          for d in range(12):
+                              if d == 0:
+                                  dic["b1"].append(str(img[a][b][c][d]))
+                                  
+                              if d == 1:
+                                  dic["b2"].append(str(img[a][b][c][d]))
+                                  
+                              if d == 2:
+                                  dic["b3"].append(str(img[a][b][c][d]))
+                                  
+                              if d == 3:
+                                  dic["b4"].append(str(img[a][b][c][d]))
+                                  
+                              if d == 4:
+                                  dic["b5"].append(str(img[a][b][c][d]))
+                                  
+                              if d == 5:
+                                  dic["b6"].append(str(img[a][b][c][d]))
+                                  
+                              if d == 6:
+                                  dic["b7"].append(str(img[a][b][c][d]))
+                                  
+                              if d == 7:
+                                  dic["b8"].append(str(img[a][b][c][d]))
+                                  
+                              if d == 8:
+                                  dic["b9"].append(str(img[a][b][c][d]))
+                                  
+                              if d == 9:
+                                  dic["b10"].append(str(img[a][b][c][d]))
+                                  
+                              if d == 10:
+                                  dic["b11"].append(str(img[a][b][c][d]))
+                                  
+                              if d == 11:
+                                  dic["b12"].append(str(img[a][b][c][d]))
+                                  
+          return dic
+        
+      else:
+        return {"ERROR": "SIZE OF FARM EXCEEDS 100 ACERS"}
     
     
 if __name__ == '__main__':
-  a = Sent("2020,3,12", "2020,4,13", ["30.396205893130897","73.5142720118165","30.396216593214966","73.51282797753811","30.394866638221142","73.5128889977932","30.394874157302326","73.51428642868996"], "all_bands").dat()
+  a = Sent("2020,3,12", "2020,4,13", ["30.396205893130897","73.5142720118165","30.396216593214966","73.51282797753811","30.394866638221142","73.5128889977932","30.394874157302326","73.51428642868996"], "abg").dat()
   print(a)
   
   
