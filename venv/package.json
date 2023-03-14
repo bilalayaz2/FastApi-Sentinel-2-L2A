@@ -1,0 +1,20 @@
+{
+    "name": "FastApi-Sentinel-2-L2A",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "build": "echo \"No build specified\" && exit 1",
+        "test": "echo \"No test specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bilalayaz2/FastApi-Sentinel-2-L2A.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/bilalayaz2/FastApi-Sentinel-2-L2A/issues"
+    },
+    "homepage": "https://github.com/bilalayaz2/FastApi-Sentinel-2-L2A#readme"
+}
