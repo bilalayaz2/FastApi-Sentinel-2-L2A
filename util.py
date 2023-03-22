@@ -12,8 +12,8 @@ class Sent:
     self.points = points
     self.es = es
     self.config = SHConfig()
-    self.config.sh_client_secret = '.[rPT/|A?/I)({^z.)x2_,D{HhJ^;EHq[DYv~UQ['
-    self.config.sh_client_id = '2bd35ae0-96d0-49d9-a575-b5b63a3c02f0'
+    self.config.sh_client_secret = 'FLero<LRWeRHe+i)Z.PhYyXg!O+r?Jf[O3TeMD9~'
+    self.config.sh_client_id = '7302054e-c4bf-4bae-b188-280a6e66ca3d'
     self.config.save()
     
   def swap(self,list,check):
